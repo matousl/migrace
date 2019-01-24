@@ -1,80 +1,223 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# Migrační bariery
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+# AOPK ČR - Databáze migrační bariery
 
-## Questions Collection [/questions]
 
-### List All Questions [GET]
+# Karta pro tok
+
+Rozhraní pro získávání informací o ** Migračních barierách**.
+
+## Tok - karta dle ID [tok/{id}?f={f}]
+
++ Parameters
+    + id: 40 (number) - Kod EVL
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
 
-### Create a New Question [POST]
+## TOK - Mapa [/{id}/mapimage?width={width}&height={height}&type={type}&f={f}]
++ Parameters
+    + id: 40 (number) - Kód EVL z ústředního seznamu ochrany přírody
+    + width: 800 (number, optional) - výška mapky
+    + height: 500 (number, optional) - šířka mapky
+    + type (enum[number], optional) - typ mapy - 0 - mapa/ 1 - preview
+        + Default: 0
+        + Members
+            + 0 - běžná mapa
+            + 1 - přehledka
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson
+            + json
+            + html
+            + xml
+    
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Přehled dotazů [GET]
 
-+ Request (application/json)
++ Response 200 (application/json)
+    + Attributes (MapaMZCHU)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
 
-+ Response 201 (application/json)
 
-    + Headers
 
-            Location: /questions/2
+## MZCHÚ - Přehledka [/{kod}/preview?width={width}&height={height}&showsingle={showsingle}&bgmap={bgmap}&f={f}]
++ Parameters
+    + kod: 2612 (number) - Kód EVL z ústředního seznamu ochrany přírody
+    + width: 800 (number, optional) - výška obrázku mapy v pixelech
+    + height: 500 (number, optional) - šířka orázku mapy v pixelech
+    + bgmap (string, optional) - typ podkladové mapy
+        + Default: zm
+        + Members
+            + ortofoto 
+            + zm 
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + json
+            + html
+            + xml
 
-    + Body
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+    + Attributes (MapaPrehledMZCHU)
+
+## MZCHÚ - přehled změn [/updateinfo?date={date}&aopk={aopk}&f={f}]
+
++ Parameters
+    + date: `2018-09-19` (string, optional) - výstup vrátí lokality, které mají alespoň jedno datum v ZmenaT,ZmenaG,DateT je větší nežli datum zadané. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + aopk (enum[number], optional) - vracet pouze lokality které nespravuje AOPK ČR / vracet pouze lokality ve správě AOPK ČR
+        + Members
+            + 0 - vracet pouze lokality které nespravuje AOPK ČR
+            + 1 - vracet pouze lokality ve správě AOPK ČR
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + json
+            + html
+            + xml
+
+            
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+
+## MZCHÚ - poslední změny [/updateinfo?aopk={aopk}&f={f}]
+
+Vrátí poslení změněnou lokalitu
+
++ Parameters
+    + aopk (enum[number], optional) - vracet pouze lokality které nespravuje AOPK ČR / vracet pouze lokality ve správě AOPK ČR
+        + Members
+            + 0 - vracet pouze lokality které nespravuje AOPK ČR
+            + 1 - vracet pouze lokality ve správě AOPK ČR
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + json
+            + html
+            + xml
+
+            
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+
+  
+# Data Structures
+
+##LokalitaMZCHU
++ Id: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Kod: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Nazev: Hádecká planinka (string) - název lokality
++ Kategorie: NPR (enum [string]) - kategorie chráněného území
+    + Members
+    + NPP - Národní přírodní památka
+    + NPR - Národní přírodní rezervace
+    + PR - Přírodní rezervace
+    + PP - Přírodní památka
++ Katastry: Kanice, Maloměřice (string) - katastrální území na kterých se tato lokalita nachází
++ Rozloha: 83.1616 (number) - rozloha (ha)
++ VyskaMin: 330 (number) - Minimální nadmořská výška dané lokality
++ VyskaMax: 422 (number) - Maximální nadmořská výška dané lokality
++ Vyhlaseno: 05.11.1948 (string) - datum vyhlášení MZCHÚ
++ PredmetOchrany: Zachovaný druhově bohatý komplex přirozených doubrav ...  (string) - podrobný popiz předmětů ochrany dané lokality
++ OOP: `AOPK ČR - RP Jižní Morava` (string) - Orgán ochrany přírody pro dané MZCHÚ zkraka: OOP
++ Emaily: jizni.morava@nature.cz (string) - email OOP
++ Telefony: `+420 549 210 226` (string)  - telefon OOP
++ Http: http://jiznimorava.ochranaprirody.cz/ (string) - www stránka OOP
++ Aopk: 1 (enum [number], optional)  
+    + Members
+        + 0  - není ve správě AOPK ČR
+        + 1 - je ve správě AOPK ČR
++ KodRp: 857 (number) - kód regionální pracoviště AOPK ČR
++ KodMzchu: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ KodVzchu: 72 (number) - kód Vzchú ve kterém se lokalita nachází
++ NazevVzchu: Litovelské Pomoraví (string) - název Vzchú ve kterém se lokalita nachází
++ WgsLon: 16.676867 (number) - střed lokality - zeměpisná délka WGS
++ WgsLat: 49.224339 (number) - střed lokality - zeměpisná šířka WGS
++ ChkoUrl: http://moravskykras.ochranaprirody.cz (string) - url regioního pracoviště
++ QrId: "m0541" (string) - QR kód (pro zobrazení informací na www.ochranaprirody.cz) 
++ QrUrl: "http://moravskykras.ochranaprirody.cz/lokality/m0541" (string) - Odkaz na informace o lokalitě na www.ochranaprirody.cz
++ HasGeometry: true (boolean) - informace zdali má lokalita zákres
++ ZmenaT: `2017-09-01` (string) - datum poslední změny tabelárních dat lokality
++ ZmenaG: `2009-08-20` (string) - datum poslední změny zákresu lokality
++ DateT: `2018-05-14` (string) - poslední změna dat v Úsopu
++ WgsLonStr: 16.676867 (string) - střed lokality - zeměpisná délka WGS (jako řetězec)
++ WgsLatStr: 49.224339 (string) - střed lokality - zeměpisná délka WGS (jako řetězec)
++ DrusopUrl: `http://drusop.nature.cz/ost/chrobjekty/zchru/index.php?frame&SHOW_ONE=1&ID=103` (string) - odkaz Odkaz na informace o lokalitě na www.drusop.cz
+
+##LokalitaSeznamMZCHU
++ Id: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Kod: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Nazev: Hádecká planinka (string) - název lokality
++ Kategorie: NPR (enum [string]) - kategorie chráněného území
+    + Members
+    + NPP - Národní přírodní památka
+    + NPR - Národní přírodní rezervace
+    + PR - Přírodní rezervace
+    + PP - Přírodní památka
++ Rozloha: 83.1616 (number) - rozloha (ha)
++ Vyhlaseno: 05.11.1948 (string) - datum vyhlášení MZCHÚ
++ OOP: AOPK ČR - RP Jižní Morava (string) - Orgán ochrany přírody pro dané MZCHÚ (OOP)
++ NazevVzchu: Litovelské Pomoraví (string) - název Vzchú ve kterém se lokalita nachází
++ WgsLon: 16.676867 (number) - střed lokality - zeměpisná délka WGS
++ WgsLat: 49.224339 (number) - střed lokality - zeměpisná šířka WGS
++ QrId: m0541 (string) - QR kód (pro zobrazení informací na www.ochranaprirody.cz) 
++ QrUrl: http://moravskykras.ochranaprirody.cz/lokality/m0541 (string) - Odkaz na informace o lokalitě na www.ochranaprirody.cz
++ HasGeometry: true (boolean) - informace zdali má lokalita zákres
++ ZmenaT: `2017-09-01` (string) - datum poslední změny tabelárních dat lokality
++ ZmenaG: `2009-08-20` (string) - datum poslední změny zákresu lokality
++ DateT: `2018-05-14` (string) - poslední změna dat v Úsopu
++ WgsLonStr: 16.676867 (string) - střed lokality - zeměpisná délka WGS (jako řetězec)
++ WgsLatStr: 49.224339 (string) - střed lokality - zeměpisná délka WGS (jako řetězec)
++ DrusopUrl: `http://drusop.nature.cz/ost/chrobjekty/zchru/index.php?frame&SHOW_ONE=1&ID=103` (string) - odkaz Odkaz na informace o lokalitě na www.drusop.cz
+
+## ZmenaVZCHU
++ Id: 1 (number) - id lokality
++ Kod: 2401 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Aopk: 1 (enum [number], optional)  
+    + Members
+        + 0  - není ve správě AOPK ČR
+        + 1 - je ve správě AOPK ČR
++ IdAopkOop: 86 (number) - ID Regionálního pracoviště AOPK ČR !!!!Zkontrolovat!!!!
++ ZmenaT: `017-09-01` (string) - datum poslední změny tabelárních dat lokality
++ ZmenaG: `2009-12-18` (string) - datum poslední změny zákresu lokality
++ DateT: `2018-05-14` (string) - poslední změna dat v Úsopu
+
+## ZakresMZCHU
++ Kod: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Shapes: `polygon ((-829460 -1018247, -829460 -1010403, -816512 -1010403, -816512 -1018247, -829460 -1018247))` (array[string]) - vrací souřadnice zákresu ve formátu ST_GEOMETRY
+
+## MapaMZCHU
++ Kod: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Scale: 17045.4774803152 (number) - měřítko mapy - přesně
++ ImageSource: 137,80,78,71,13,10,96,130 (array [number]) - obrázek v bytech
++ ImageFormat: Jpeg (enum [string]) - formát souboru s obrázkem mapy
+    + Members
+    + Jpeg
++ ScaleView: 17 045 (string) - měřítko mapy zformátované pro zobrazení
+
+## MapaPrehledMZCHU (MapaMZCHU)
