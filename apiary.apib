@@ -1,18 +1,146 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
-
+HOST: http://webgis.nature.cz/aopkrest/mig/
 
 # AOPK ČR - Databáze migrační bariery
 
+Rozhraní pro získávání informací o ** Migračních barierách**
 
-# Karta pro tok
-
-Rozhraní pro získávání informací o ** Migračních barierách**.
-
-## Tok - karta dle ID [tok/{id}?f={f}]
+## Tok - karta dle ID [/tok/{id}?f={f}]
 
 + Parameters
-    + id: 40 (number) - Kod EVL
+    + id: 40 (number) - Kod toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Tok - Mapa [/tok/{id}/mapimage?width={width}&height={height}&type={typ}&f={f}]
+
++ Parameters
+    + id: 40 (number) - Kód EVL z ústředního seznamu ochrany přírody
+    + width: 800 (number, optional) - výška mapky
+    + height: 500 (number, optional) - šířka mapky
+    + typ (enum[number], optional) - typ mapy 0 mapa/ 1 preview
+        + Default: 0
+        + Members
+            + 0 - běžná mapa
+            + 1 - přehledka
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson
+            + json
+            + html
+            + xml
+
+    
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+    + Attributes (MapaMZCHU)
+
+
+## Bariera - karta dle ID [/bar/{id}?f={f}]
+
++ Parameters
+    + id: 63 (number) - id pro test [67,3]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+## Prostupný objekt - karta dle ID [/po/{id}?f={f}]
+
++ Parameters
+    + id: 4 (number) - ID
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Malá vodní elektrárna /MVE/ - karta dle ID [/mve/{id}?f={f}]
+
++ Parameters
+    + id: 4 (number) - ID
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Karta pro nakládání s vodami dle ID [/naklvod/{id}?f={f}]
+
++ Parameters
+    + id: 271 (number) - ID
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Číselníky [/ciselniky/?f={f}]
+
++ Parameters
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Toky - změny [/zmeny/tok?datum={datum}&f={f}]
+
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
     + f (string, optional) - formát výstupu
         + Default: html
         + Members
@@ -25,73 +153,195 @@ Rozhraní pro získávání informací o ** Migračních barierách**.
 
 + Response 200 (application/json)
 
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
 
-## TOK - Mapa [/{id}/mapimage?width={width}&height={height}&type={type}&f={f}]
+
+## Tok - změna dle ID [/zmeny/tok/id/{id}?f={f}]
+
 + Parameters
-    + id: 40 (number) - Kód EVL z ústředního seznamu ochrany přírody
-    + width: 800 (number, optional) - výška mapky
-    + height: 500 (number, optional) - šířka mapky
-    + type (enum[number], optional) - typ mapy - 0 - mapa/ 1 - preview
-        + Default: 0
-        + Members
-            + 0 - běžná mapa
-            + 1 - přehledka
+    + id: 1 (number) - Kod toku
     + f (string, optional) - formát výstupu
         + Default: html
         + Members
-            + pjson
+            + pjson - formátovaný json
             + json
             + html
             + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Bariéry - změny [/zmeny/bar?datum={datum}&f={f}]
+
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+
+## Bariéra - změna dle ID [/zmeny/bar/id/{id}?f={f}]
+
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+   + Attributes (MapaMZCHU)
+
+
+## Prostupné objekty - změny [/zmeny/po?datum={datum}&f={f}]
+
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+## Prostupný objekt - změna dle id [/zmeny/po/id/{id}?f={f}]
+
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+## Malé vodní elektrárny /MVE/ - změny [/zmeny/mve?datum={datum}&f={f}]
+
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+## Malá vodní elektrárna /MVE/ - změna dle id [/zmeny/mve/id/{id}?f={f}]
+
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+
+## Nakládání s vodami - změny [/zmeny/naklvod?datum={datum}&f={f}]
+
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+
+
+## Nakládání s vodou - změna dle id [/zmeny/naklvod/id/{id}?f={f}]
+
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+    
+    
     
 
-### Přehled dotazů [GET]
+## Číselníky - změny [/zmeny/ciselniky?f={f}]
 
-+ Response 200 (application/json)
-    + Attributes (MapaMZCHU)
-
-
-
-
-## MZCHÚ - Přehledka [/{kod}/preview?width={width}&height={height}&showsingle={showsingle}&bgmap={bgmap}&f={f}]
 + Parameters
-    + kod: 2612 (number) - Kód EVL z ústředního seznamu ochrany přírody
-    + width: 800 (number, optional) - výška obrázku mapy v pixelech
-    + height: 500 (number, optional) - šířka orázku mapy v pixelech
-    + bgmap (string, optional) - typ podkladové mapy
-        + Default: zm
-        + Members
-            + ortofoto 
-            + zm 
     + f (string, optional) - formát výstupu
         + Default: html
         + Members
+            + pjson - formátovaný json
             + json
             + html
             + xml
 
-
-### Přehled dotazů [GET]
-
-+ Response 200 (application/json)
-    + Attributes (MapaPrehledMZCHU)
-
-## MZCHÚ - přehled změn [/updateinfo?date={date}&aopk={aopk}&f={f}]
-
-+ Parameters
-    + date: `2018-09-19` (string, optional) - výstup vrátí lokality, které mají alespoň jedno datum v ZmenaT,ZmenaG,DateT je větší nežli datum zadané. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
-    + aopk (enum[number], optional) - vracet pouze lokality které nespravuje AOPK ČR / vracet pouze lokality ve správě AOPK ČR
-        + Members
-            + 0 - vracet pouze lokality které nespravuje AOPK ČR
-            + 1 - vracet pouze lokality ve správě AOPK ČR
-    + f (string, optional) - formát výstupu
-        + Default: html
-        + Members
-            + json
-            + html
-            + xml
-
-            
 ### Přehled dotazů [GET]
 
 + Response 200 (application/json)
@@ -100,32 +350,6 @@ Rozhraní pro získávání informací o ** Migračních barierách**.
     + Attributes (array[ZmenaVZCHU])
 
 
-## MZCHÚ - poslední změny [/updateinfo?aopk={aopk}&f={f}]
-
-Vrátí poslení změněnou lokalitu
-
-+ Parameters
-    + aopk (enum[number], optional) - vracet pouze lokality které nespravuje AOPK ČR / vracet pouze lokality ve správě AOPK ČR
-        + Members
-            + 0 - vracet pouze lokality které nespravuje AOPK ČR
-            + 1 - vracet pouze lokality ve správě AOPK ČR
-    + f (string, optional) - formát výstupu
-        + Default: html
-        + Members
-            + json
-            + html
-            + xml
-
-            
-### Přehled dotazů [GET]
-
-+ Response 200 (application/json)
-
-    + Attributes (array[ZmenaVZCHU])
-    + Attributes (array[ZmenaVZCHU])
-
-
-  
 # Data Structures
 
 ##LokalitaMZCHU
