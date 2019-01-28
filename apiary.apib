@@ -3,11 +3,10 @@ HOST: http://polls.apiblueprint.org/
 
 # AOPK ČR - Life CS - Druhy a Biotopy
 
-Rozhraní pro získávání informací o **Migračních barierách**
+Rozhraní pro získávání informací o ** druzích a biotopech na lokalitách life české středohoří**
  
-## Lokality - seznam [/lokality/?f={f}]
+## Lokality Life CS - seznam [/lokality/?f={f}]
 
-V_LF_
 + Parameters
     + f (string, optional) - formát výstupu
         + Default: html
@@ -21,8 +20,9 @@ V_LF_
 
 + Response 200 (application/json)
   + Attributes (array[Lokalita])
+  + Attributes (array[Lokalita])
 
-## Lokality - poslední změna [/zmeny/lokality/?f={f}]
+## Lokality Life CS - poslední změna [/zmeny/lokality/?f={f}]
 
 + Parameters
     + f (string, optional) - formát výstupu
@@ -48,6 +48,7 @@ V_LF_
 + Druhy (array) - Výstupy viz zdroj dat v tabulce V_LF_DRUH - v popisu je uveden /SLOUPEC TABULKY/
     + (Druh)
     + (Druh)
+
 
 ##Biotop
 + StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště /HABITAT/
