@@ -5,8 +5,9 @@ HOST: http://polls.apiblueprint.org/
 
 Rozhraní pro získávání informací o **Migračních barierách**
  
-## Biotopy - seznam [/biotopy/?f={f}]
-Výstupy propojené s tabulkou V_LF_BIOTOP viz ATTRIBUTES /SLOUPEC TABULKY/
+## Lokality - seznam [/lokality/?f={f}]
+
+V_LF_
 + Parameters
     + f (string, optional) - formát výstupu
         + Default: html
@@ -19,42 +20,9 @@ Výstupy propojené s tabulkou V_LF_BIOTOP viz ATTRIBUTES /SLOUPEC TABULKY/
 ### Přehled dotazů [GET]
 
 + Response 200 (application/json)
-  + Attributes (Biotop)
+  + Attributes (array[Lokalita])
 
-## Biotopy - poslední změna [/zmeny/biotopy/?f={f}]
-
-+ Parameters
-    + f (string, optional) - formát výstupu
-        + Default: html
-        + Members
-            + pjson - formátovaný json
-            + json
-            + html
-            + xml
-
-### Přehled dotazů [GET]
-
-+ Response 200 (application/json)
-  + Attributes (Zmena)
-
-## Druhy - seznam [/druhy/?f={f}]
-Výstupy propojené s tabulkou V_LF_DRUH viz ATTRIBUTES /SLOUPEC TABULKY/
-
-+ Parameters
-    + f (string, optional) - formát výstupu
-        + Default: html
-        + Members
-            + pjson - formátovaný json
-            + json
-            + html
-            + xml
-
-### Přehled dotazů [GET]
-
-+ Response 200 (application/json)
-  + Attributes (Druh)
-
-## Druhy - poslední změna [/zmeny/druhy/?f={f}]
+## Lokality - poslední změna [/zmeny/lokality/?f={f}]
 
 + Parameters
     + f (string, optional) - formát výstupu
@@ -69,33 +37,36 @@ Výstupy propojené s tabulkou V_LF_DRUH viz ATTRIBUTES /SLOUPEC TABULKY/
 
 + Response 200 (application/json)
   + Attributes (Zmena)
-
 
 # Data Structures
 
-##Biotop
-+ StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště /HABITAT/
-+ StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště /NAZEV_HABITAT/
-+ StanovisteNazevEN: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině /NAME_HABITAT/
-+ Kod: L2.3 (string) - Kód biotopu /KOD/
-+ Nazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/
-+ Rozloha (object)
-  + RozlohaHodnota: 1164.5611 (number) - Rozloha biotopu - číselně - /ROZLOHA/
-  + RozlohaJednotka: ha (string) - Rozloha biotopu - jednotka - /v tabulce není/
-  + UIValue: 1 164.561 ha (string) - rozloha biotopu zformátovaná pro výstup - /v tabulce není/
-+ RozlohaRelativ: 18.8 (number) - relativní rozloha biotopu /ROZLOHA_REL/
-+ Kvalita: 2.12 (number) - Kvalita biotopu /KVALITA/
+##Lokalita
++ IDLokality: 4 (number) - číslo lokality /IDX_OBJEKT/
 
 
-##Druh 
-+ DruhKat: Obojživelníci (string) - Kategorie /DRUHKAT/
-+ DruhNazevLat: Bufo bufo (string) - Latinský název druhu /DRUHNAZEVLAT/
-+ DruhNazevCz: ropucha obecná (string, optional) - Český název druhu /DRUHNAZEVCZ/
-+ OchranaKat: Ohrožený (string) - Kategorie /OCHRANAKAT/
-+ Smernice: null (string) - /SMERNICE/ 
-+ CervenySeznam: null (string) - Červený seznam /CERVENYSEZNAM/
-+ RokPoslZaz: 2015 (number) - rok posledního záznamu /POSLEDNI_ROK/
-+ DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \IDX_OBJEKT\ **
+
++ Biotopy(object) - Výstupy viz zdroj dat v tabulce V_LF_BIOTOP - v popisu je uveden /SLOUPEC TABULKY/
+    + StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště /HABITAT/
+    + StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště /NAZEV_HABITAT/
+    + StanovisteNazevEN: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině /NAME_HABITAT/
+    + Kod: L2.3 (string) - Kód biotopu /KOD/
+    + Nazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/
+    + Rozloha (object)
+        + RozlohaHodnota: 1164.5611 (number) - Rozloha biotopu - číselně - /ROZLOHA/
+    + RozlohaJednotka: ha (string) - Rozloha biotopu - jednotka - /v tabulce není/
+    + UIValue: 1 164.561 ha (string) - rozloha biotopu zformátovaná pro výstup - /v tabulce není/
+    + RozlohaRelativ: 18.8 (number) - relativní rozloha biotopu /ROZLOHA_REL/
+    + Kvalita: 2.12 (number) - Kvalita biotopu /KVALITA/
++ Druhy(object)
+    + DruhKat: Obojživelníci (string) - Kategorie /DRUHKAT/
+    + DruhNazevLat: Bufo bufo (string) - Latinský název druhu /DRUHNAZEVLAT/
+    + DruhNazevCz: ropucha obecná (string, optional) - Český název druhu /DRUHNAZEVCZ/
+    + OchranaKat: Ohrožený (string) - Kategorie /OCHRANAKAT/
+    + Smernice: null (string) - /SMERNICE/ 
+    + CervenySeznam: null (string) - Červený seznam /CERVENYSEZNAM/
+    + RokPoslZaz: 2015 (number) - rok posledního záznamu /POSLEDNI_ROK/
+    + DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \IDX_OBJEKT\ **
+
 
 ##Zmena
 + DateT: `2018-05-14` (string) - poslední změna v datech
