@@ -3,10 +3,10 @@ HOST: http://polls.apiblueprint.org/
 
 # AOPK ČR - Life CS - Druhy a Biotopy
 
-Rozhraní pro získávání informací o ** Migračních barierách**
-
+Rozhraní pro získávání informací o **Migračních barierách**
+ 
 ## Biotopy - seznam [/biotopy/?f={f}]
-
+Výstupy propojené s tabulkou V_LF_BIOTOP viz ATTRIBUTES /SLOUPEC TABULKY/
 + Parameters
     + f (string, optional) - formát výstupu
         + Default: html
@@ -38,6 +38,7 @@ Rozhraní pro získávání informací o ** Migračních barierách**
   + Attributes (Zmena)
 
 ## Druhy - seznam [/druhy/?f={f}]
+Výstupy propojené s tabulkou V_LF_DRUH viz ATTRIBUTES /SLOUPEC TABULKY/
 
 + Parameters
     + f (string, optional) - formát výstupu
@@ -73,9 +74,9 @@ Rozhraní pro získávání informací o ** Migračních barierách**
 # Data Structures
 
 ##Biotop
-    data z tabulky V_LF_BIOTOP
 + StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště /HABITAT/
 + StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště /NAZEV_HABITAT/
++ StanovisteNazevEN: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině /NAME_HABITAT/
 + Kod: L2.3 (string) - Kód biotopu /KOD/
 + Nazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/
 + Rozloha (object)
@@ -87,7 +88,6 @@ Rozhraní pro získávání informací o ** Migračních barierách**
 
 
 ##Druh 
- data z tabulky V_LF_BIOTOP V_LF_DRUH
 + DruhKat: Obojživelníci (string) - Kategorie /DRUHKAT/
 + DruhNazevLat: Bufo bufo (string) - Latinský název druhu /DRUHNAZEVLAT/
 + DruhNazevCz: ropucha obecná (string, optional) - Český název druhu /DRUHNAZEVCZ/
@@ -95,7 +95,7 @@ Rozhraní pro získávání informací o ** Migračních barierách**
 + Smernice: null (string) - /SMERNICE/ 
 + CervenySeznam: null (string) - Červený seznam /CERVENYSEZNAM/
 + RokPoslZaz: 2015 (number) - rok posledního záznamu /POSLEDNI_ROK/
-+ DruhKarta: http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4 (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  *http://portal.nature.cz/publik_syst/nd_nalez-public.php?* **\IDX_OBJEKT\**
++ DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \IDX_OBJEKT\ **
 
 ##Zmena
 + DateT: `2018-05-14` (string) - poslední změna v datech
