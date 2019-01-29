@@ -1,9 +1,9 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://webgis.nature.cz/aopkrest/lifecs/
 
 # AOPK ČR - Life CS - Druhy a Biotopy
 
-Rozhraní pro získávání informací o ** druzích a biotopech na lokalitách life české středohoří**
+Rozhraní pro získávání informací o **druzích a biotopech na lokalitách life české středohoří**
  
 ## Lokality Life CS - seznam [/lokality/?f={f}]
 
@@ -38,10 +38,27 @@ Rozhraní pro získávání informací o ** druzích a biotopech na lokalitách 
 + Response 200 (application/json)
   + Attributes (Zmena)
 
+
+## Číselníky [/ciselniky?f={f}]
++ Parameters
+    + f (string, optional) - formát výstupu
+        + Default: json
+        + Members
+            + json
+            + pjson
+            + html
+            + xml
+
+### Číselníky [GET]
+
++ Response 200 (application/json)
+
+
+
 # Data Structures
 
 ##Lokalita
-+ IDLokality: 4 (number) - číslo lokality /IDX_OBJEKT/
++ LokalitaId: 4 (number) - id lokality /IDX_OBJEKT/
 + Biotopy (array) - Výstupy viz zdroj dat v tabulce V_LF_BIOTOP - v popisu je uveden /SLOUPEC TABULKY/
     + (Biotop)
     + (Biotop)
@@ -55,12 +72,13 @@ Rozhraní pro získávání informací o ** druzích a biotopech na lokalitách 
 + StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště /NAZEV_HABITAT/
 + StanovisteNazevEN: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině /NAME_HABITAT/
 + Kod: L2.3 (string) - Kód biotopu /KOD/
-+ Nazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/
++ Nazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/ *obsahuje formátování latinských názvů kurzívou <i></i>*
++ NazevEN: Tvrdé luhy nížinných řek (string) - Název Biotopu v angličtině  /BIOTOP/ * obsahuje formátování latinských názvů kurzívou <i></i>*
 + Rozloha (object)
     + RozlohaHodnota: 1164.5611 (number) - Rozloha biotopu - číselně - /ROZLOHA/
-+ RozlohaJednotka: ha (string) - Rozloha biotopu - jednotka - /v tabulce není/
-+ UIValue: 1 164.561 ha (string) - rozloha biotopu zformátovaná pro výstup - /v tabulce není/
-+ RozlohaRelativ: 18.8 (number) - relativní rozloha biotopu /ROZLOHA_REL/
+    + RozlohaJednotka: ha (string) - Rozloha biotopu - jednotka - /v tabulce není/
+    + UIValue: 1 164.561 ha (string) - rozloha biotopu zformátovaná pro výstup - /v tabulce není/
++ RozlohaRelativni: 18.8 (number) - relativní rozloha biotopu /ROZLOHA_REL/
 + Kvalita: 2.12 (number) - Kvalita biotopu /KVALITA/
 
 
@@ -74,6 +92,52 @@ Rozhraní pro získávání informací o ** druzích a biotopech na lokalitách 
 + RokPoslZaz: 2015 (number) - rok posledního záznamu /POSLEDNI_ROK/
 + DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \IDX_OBJEKT\ **
 
+##CISDRUH
+
+
+
+##CISBIOTOP
+
+
 
 ##Zmena
 + DateT: `2018-05-14` (string) - poslední změna v datech
+
+
+
+ {
+         "Ciselniky": {
+          "Biotopy": [
+           {
+            "Popis": "Slaniska",
+            "Kod": "T7",
+            "HabitatName": "Inland salt meadows",
+            "Habitat": "1340",
+            "HabitatNazev": "Vnitrozemské slané louky"
+           },{
+            "Popis": "Jednoletá vegetace písčin",
+            "Kod": "T5.1",
+            "HabitatName": "Inland dunes with open Corynephorus and Agrostis grasslands",
+            "Habitat": "2330",
+            "HabitatNazev": "Otevřené trávníky kontinentálních dun s paličkovcem (Corynephorus) a psinečkem (Agrostis)"
+        }],
+          "Druhy": [
+           {
+            "Kat": "Obojživelníci",
+            "CervenySeznam": "Ohrožený (EN)",
+            "NazevCZ": "kuňka obecná",
+            "NazevLAT": "Bombina bombina",
+            "IdNdTaxon": 1,
+            "Smernice": "HD II, HD IV",
+            "Ochrana": "Silně ohrožený"
+           },{
+            "Kat": "Obojživelníci",
+            "CervenySeznam": "Ohrožený (EN)",
+            "NazevCZ": null,
+            "NazevLAT": "Bombina sp.",
+            "IdNdTaxon": 2,
+            "Smernice": null,
+            "Ochrana": null
+           }]
+         }
+    }
