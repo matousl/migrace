@@ -68,12 +68,7 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
 
 
 ##Biotop
-+ StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště /HABITAT/
-+ StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště /NAZEV_HABITAT/
-+ StanovisteNazevEN: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině /NAME_HABITAT/
-+ Kod: L2.3 (string) - Kód biotopu /KOD/
-+ Nazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/ *obsahuje formátování latinských názvů kurzívou <i></i>*
-+ NazevEN: Tvrdé luhy nížinných řek (string) - Název Biotopu v angličtině  /BIOTOP/ * obsahuje formátování latinských názvů kurzívou <i></i>*
++ include CISBIOTOP
 + Rozloha (object)
     + RozlohaHodnota: 1164.5611 (number) - Rozloha biotopu - číselně - /ROZLOHA/
     + RozlohaJednotka: ha (string) - Rozloha biotopu - jednotka - /v tabulce není/
@@ -81,30 +76,37 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
 + RozlohaRelativni: 18.8 (number) - relativní rozloha biotopu /ROZLOHA_REL/
 + Kvalita: 2.12 (number) - Kvalita biotopu /KVALITA/
 
-
 ##Druh
-+ DruhKat: Obojživelníci (string) - Kategorie /DRUHKAT/
-+ DruhNazevLat: Bufo bufo (string) - Latinský název druhu /DRUHNAZEVLAT/
-+ DruhNazevCz: ropucha obecná (string, optional) - Český název druhu /DRUHNAZEVCZ/
-+ OchranaKat: Ohrožený (string) - Kategorie /OCHRANAKAT/
-+ Smernice: null (string) - /SMERNICE/ 
++ include CISDRUH
 + CervenySeznam: null (string) - Červený seznam /CERVENYSEZNAM/
 + RokPoslZaz: 2015 (number) - rok posledního záznamu /POSLEDNI_ROK/
-+ DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \IDX_OBJEKT\ **
-
-##CISDRUH
-
-
++ DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \TaxonId\ **
 
 ##CISBIOTOP
++ StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště /HABITAT/
++ StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště /NAZEV_HABITAT/ * obsahuje formátování latinských názvů kurzívou <i></i>*
++ StanovisteNazevEn: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině /NAME_HABITAT/ * obsahuje formátování latinských názvů kurzívou <i></i>*
++ BiotopKod: L2.3 (string) - Kód biotopu /KOD/
++ BiotopNazev: Tvrdé luhy nížinných řek (string) - Název Biotopu /BIOTOP/ * obsahuje formátování latinských názvů kurzívou <i></i>*
++ BiotopNazevEn: Tvrdé luhy nížinných řek (string) - Název Biotopu v angličtině  /BIOTOP_EN/ * obsahuje formátování latinských názvů kurzívou <i></i>*
++ BiotopNazevEn: Tvrdé luhy nížinných řek (string) - Název Biotopu v angličtině  /BIOTOP_EN/ * obsahuje formátování latinských názvů kurzívou <i></i>*
+
+##CISDRUH
++ TaxonId: 4 (number) - id taxonu
++ DruhKat: Obojživelníci (string) - Kategorie /DRUHKAT/
++ DruhNazevCz: ropucha obecná (string, optional) - Český název druhu /DRUHNAZEVCZ/
++ DruhNazevLat: Bufo bufo (string) - Latinský název druhu /DRUHNAZEVLAT/
++ OchranaKat: Ohrožený (string) - Kategorie /OCHRANAKAT/
++ Smernice: null (string) - /SMERNICE/ 
+
+
+
+
 
 
 
 ##Zmena
 + DateT: `2018-05-14` (string) - poslední změna v datech
-
-
-
  {
          "Ciselniky": {
           "Biotopy": [
