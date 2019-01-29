@@ -5,7 +5,7 @@ HOST: http://webgis.nature.cz/aopkrest/lifecs/
 
 Rozhraní pro získávání informací o **druzích a biotopech na lokalitách life České středohoří**
  
-## Seznam druhů a biotopů dle lokalit [/lokality/?f={f}]
+## Seznam druhů a biotopů na lokalitách [/lokality/?f={f}]
 
 + Parameters
     + f (string, optional) - formát výstupu
@@ -16,11 +16,11 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
             + html
             + xml
 
-### Přehled dotazů [GET]
+### Přehled [GET]
 
 + Response 200 (application/json)
-  + Attributes (array[Lokalita])
-  + Attributes (array[Lokalita])
+    + Attributes (array[Lokalita])
+    + Attributes (array[Lokalita])
 
 ## Číselníky [/ciselniky?f={f}]
 + Parameters
@@ -32,13 +32,13 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
             + html
             + xml
 
-### Přehled dotazů [GET]
+### Přehled [GET]
 
 + Response 200 (application/json)
     + Attributes (array[Ciselnik])
     + Attributes (array[Ciselnik])
 
-## Poslední změny [/zmeny/?f={f}]
+## Změny [/zmeny/?f={f}]
 
 + Parameters
     + f (string, optional) - formát výstupu
@@ -49,16 +49,12 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
             + html
             + xml
 
-### Přehled dotazů [GET]
+### Přehled [GET]
 
 + Response 200 (application/json)
-  + Attributes (Zmena)
+    + Attributes (array[Zmena])
+    + Attributes (array[Zmenna])
  
- 
-
-
-
-
 
 # Data Structures
 
@@ -78,7 +74,7 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
 + Druhy (array) 
     + (CisDruh)
     + (CisDruh)
-    
+
 
 ##Biotop
 + include CisBiotop
@@ -112,4 +108,8 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
 + Smernice: null (string) - /SMERNICE/ 
 
 ##Zmena
-+ DateT: `2018-05-14` (string) - poslední změna v datech
++ Agenda: data (enum [string]) - kategorie chráněného území
+    + Members
+    + data - změna v seznamu druhů a biotopů
+    + ciselniky - změna v číselnících 
++ Datum: `2018-05-14` (string) - datum poslední změny v dané agendě
