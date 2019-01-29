@@ -1,9 +1,9 @@
 FORMAT: 1A
 HOST: http://webgis.nature.cz/aopkrest/lifecs/
 
-# AOPK ČR - Life CS - Druhy a Biotopy
+# AOPK ČR - LIFE CS - Druhy a Biotopy
 
-Rozhraní pro získávání informací o **druzích a biotopech na lokalitách life České středohoří**
+Rozhraní pro získávání informací o **druzích a biotopech na lokalitách LIFE České středohoří**
  
 ## Seznam druhů a biotopů na lokalitách [/lokality/?f={f}]
 
@@ -16,7 +16,7 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
             + html
             + xml
 
-### Přehled [GET]
+### Vlastnosti [GET]
 
 + Response 200 (application/json)
     + Attributes (array[Lokalita])
@@ -32,7 +32,7 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
             + html
             + xml
 
-### Přehled [GET]
+### Vlastnosti [GET]
 
 + Response 200 (application/json)
     + Attributes (array[Ciselnik])
@@ -49,11 +49,11 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
             + html
             + xml
 
-### Přehled [GET]
+### Vlastnosti [GET]
 
 + Response 200 (application/json)
     + Attributes (array[Zmena])
-    + Attributes (array[Zmenna])
+    + Attributes (array[Zmena])
  
 
 # Data Structures
@@ -108,7 +108,7 @@ Rozhraní pro získávání informací o **druzích a biotopech na lokalitách l
 + Smernice: null (string) - /SMERNICE/ 
 
 ##Zmena
-+ Agenda: data (enum [string]) - kategorie chráněného území
++ Agenda: data (enum [string]) - Typ dat
     + Members
     + data - změna v seznamu druhů a biotopů
     + ciselniky - změna v číselnících 
