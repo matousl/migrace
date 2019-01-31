@@ -1,15 +1,14 @@
 FORMAT: 1A
-HOST: http://webgis.nature.cz/aopkrest/lifecs/
+HOST: http://webgis.nature.cz/aopkrest/mig/
 
-# AOPK ČR - LIFE CS - Druhy a Biotopy
+# AOPK ČR - Databáze migrační bariery
 
-Rozhraní pro získávání informací o **druzích a biotopech na lokalitách LIFE České středohoří**
- 
-## Seznam lokalit [/lokality/?f={f}]
+Rozhraní pro získávání informací o ** Migračních barierách**
 
-Vrací seznam druhů a biotopů rozdělených dle lokalit a to v českém i anglickém jazyce. 
+## Tok - karta dle ID [/tok/{id}?f={f}]
 
 + Parameters
+    + id: 40 (number) - Kod toku
     + f (string, optional) - formát výstupu
         + Default: html
         + Members
@@ -18,34 +17,362 @@ Vrací seznam druhů a biotopů rozdělených dle lokalit a to v českém i angl
             + html
             + xml
 
-### Podrobnosti [GET]
+### Přehled dotazů [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[Lokalita])
-    + Attributes (array[Lokalita])
 
-## Číselníky [/ciselniky?f={f}]
+            {
+                "Tok": {
+                    "Odkaz": {
+                        "Url": "http://webgis.nature.cz/aopkrest/mig/tok/40",
+                        "UIValue": "Trkmanka"
+                    },
+                    "Id": 40,
+                    "Nazev": "Trkmanka",
+                    "Kod": 10100087,
+                    "RybiPasmo": null,
+                    "Koncepce": "úsek vodního toku mimo koncepci",
+                    "Mapovano": "ano",
+                    "DelkaUseku": {
+                        "DelkaHodnota": 430,
+                        "DelkaJednotka": "m",
+                        "UIValue": "430 m"
+                    },
+                    "DuvodNemap": null,
+                    "OdkazMapImg": "http://webgis.nature.cz/aopkrest/mig/tok/40/mapimage",
+                    "OdkazMapa": {
+                        "Url": "http://webgis.nature.cz/mig?vrstva=4&najdi=40",
+                        "UIValue": "mapa"
+                    },
+                    "Bariery": [],
+                    "Ochrana": [
+                        {
+                            "Nazev": "EVL Niva Dyje"
+                        }
+                    ],
+                    "Taxony": []
+                }
+            }
 
-Vrací kompletní číselníky Biotopů a Druhů pro případné využití pro vyhledávání, nebo filtrování atd.
+
+## Tok - Mapa [/tok/{id}/mapimage?width={width}&height={height}&type={typ}&f={f}]
 
 + Parameters
-    + f (string, optional) - formát výstupu
-        + Default: json
+    + id: 40 (number) - Kód EVL z ústředního seznamu ochrany přírody
+    + width: 800 (number, optional) - výška mapky
+    + height: 500 (number, optional) - šířka mapky
+    + typ (enum[number], optional) - typ mapy 0 mapa/ 1 preview
+        + Default: 0
         + Members
-            + json
+            + 0 - běžná mapa
+            + 1 - přehledka
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
             + pjson
+            + json
             + html
             + xml
 
-### Podrobnosti [GET]
+    
+### Přehled dotazů [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[Ciselnik])
-    + Attributes (array[Ciselnik])
+    + Attributes (MapaTok)
 
-## Změny [/zmeny/?f={f}]
 
-Vrací data poslendních změn v seznam druhů a biotopů pro lokality a číselnicích. Určené pro případnou aktualizaci těchto dat.
+## Bariera - karta dle ID [/bar/{id}?f={f}]
+
++ Parameters
+    + id: 63 (number) - id pro test [67,3]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+                {
+                    "Bar": {
+                        "Odkaz": {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/bar/63",
+                            "UIValue": "jez"
+                        },
+                        "OdkazTok": {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/tok/11377",
+                            "UIValue": "Radbuza"
+                        },
+                        "NazevTok": "Radbuza",
+                        "RicniKm": "74,92",
+                        "MigProst": "ne",
+                        "Id": 63,
+                        "KatId": 1,
+                        "KatNazev": "jez",
+                        "Lokalizace": {
+                            "Lat": 49.544799,
+                            "Lon": 12.856784,
+                            "UIValue": "49.544799N 12.856784E"
+                        },
+                        "NadmVyska": {
+                            "Vyska": 391,
+                            "VyskaJednotka": "m n. m.",
+                            "UIValue": "391 m n. m."
+                        },
+                        "DatMon": "14.11.2016",
+                        "DtbSpravce": "ne",
+                        "Poznamka": null,
+                        "OdkazFotoNahled": "http://fotoarchiv.nature.cz/squareImage.php?image=1497505324355aa5362.jpg&size=160",
+                        "OdkazFotoVelke": "http://fotoarchiv.nature.cz/galImage.php?image=1497505324355aa5362.jpg",
+                        "OdkazMapa": {
+                            "Url": "http://webgis.nature.cz/mig?vrstva=1&najdi=63",
+                            "UIValue": "mapa"
+                        },
+                        "OnlineUrl": null,
+                        "Monitoring": [],
+                        "KatInfo": {
+                            "JezStav": "plně funkční",
+                            "JezDruh": "stavidlový",
+                            "JezPudorys": "přímý kolmý",
+                            "JezVyska": "61 - 80 cm",
+                            "JezUcel": "stabilizace sklonu",
+                            "JezPlKomora": "ne"
+                        },
+                        "Objekty": [],
+                        "Mve": []
+                    }
+                }
+
+## Prostupný objekt - karta dle ID [/po/{id}?f={f}]
+
++ Parameters
+    + id: 4 (number) - ID
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+             {
+                "Po": {
+                    "Odkaz": {
+                        "Url": "http://webgis.nature.cz/aopkrest/mig/po/4",
+                        "UIValue": "rybí přechod"
+                    },
+                    "Id": 4,
+                    "KatId": 8,
+                    "KatNazev": "rybí přechod",
+                    "RicniKm": "795,62",
+                    "Lokalizace": {
+                        "Lat": 50.526261,
+                        "Lon": 14.18035,
+                        "UIValue": "50.526261N 14.18035E"
+                    },
+                    "NadmVyska": {
+                        "Vyska": 146,
+                        "VyskaJednotka": "m n. m.",
+                        "UIValue": "146 m n. m."
+                    },
+                    "DatMon": "02.01.2017",
+                    "Poznamka": null,
+                    "OdkazFotoNahled": "http://fotoarchiv.nature.cz/squareImage.php?image=1497508128e49102683.jpg&size=160",
+                    "OdkazFotoVelke": "http://fotoarchiv.nature.cz/galImage.php?image=1497508128e49102683.jpg",
+                    "OdkazMapa": {
+                        "Url": "http://webgis.nature.cz/mig?vrstva=1&najdi=5652",
+                        "UIValue": "mapa"
+                    },
+                    "Hodnoceni": [],
+                    "KatInfo": {
+                        "PreTyp": "bypass",
+                        "PreUmist": "pravý břeh",
+                        "PreSklon": "nad 1:30",
+                        "PreDelka": "více než 30 m",
+                        "PreSirka": "více než 5 m",
+                        "PropPrutok": "751 - 1000 l/s"
+                    },
+                    "BarInfo": {
+                        "Odkaz": {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/bar/5652",
+                            "UIValue": "jez"
+                        },
+                        "OdkazTok": {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/tok/11414",
+                            "UIValue": "Labe (ř. km: 727,7 - 838,8)"
+                        },
+                        "NazevTok": "Labe (ř. km: 727,7 - 838,8)",
+                        "RicniKm": "795,62",
+                        "MigProst": "ano",
+                        "Objekty": [
+                            {
+                                "Odkaz": {
+                                    "Url": "http://webgis.nature.cz/aopkrest/mig/po/2545",
+                                    "UIValue": "rybí přechod"
+                                }
+                            }
+                        ],
+                        "Mve": [
+                            {
+                                "Odkaz": {
+                                    "Url": "http://webgis.nature.cz/aopkrest/mig/mve/211",
+                                    "UIValue": "příjezová - pravý břeh"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+
+
+## Malá vodní elektrárna /MVE/ - karta dle ID [/mve/{id}?f={f}]
+
++ Parameters
+    + id: 4 (number) - ID
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+            {
+                "Mve": {
+                    "Odkaz": {
+                        "Url": "http://webgis.nature.cz/aopkrest/mig/mve/3",
+                        "UIValue": "pravý břeh"
+                    },
+                    "Id": 3,
+                    "RicniKm": "135,34",
+                    "Lokalizace": {
+                        "Lat": 49.771345,
+                        "Lon": 13.417798,
+                        "UIValue": "49.771345N 13.417798E"
+                    },
+                    "NadmVyska": {
+                        "Vyska": 303,
+                        "VyskaJednotka": "m n. m.",
+                        "UIValue": "303 m n. m."
+                    },
+                    "DatMon": "11.01.2017",
+                    "Poznamka": null,
+                    "OdkazFotoNahled": null,
+                    "OdkazFotoVelke": null,
+                    "OdkazMapa": {
+                        "Url": "http://webgis.nature.cz/mig?vrstva=1&najdi=7819",
+                        "UIValue": "mapa"
+                    },
+                    "KatInfo": {
+                        "MveStav": "funkční",
+                        "MveTyp": "příjezová",
+                        "MveUmist": "pravý břeh",
+                        "MvePoprOchr": "nezjištěno"
+                    },
+                    "BarInfo": {
+                        "Odkaz": {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/bar/7819",
+                            "UIValue": "jez"
+                        },
+                        "OdkazTok": {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/tok/5260",
+                            "UIValue": "Berounka"
+                        },
+                        "NazevTok": "Berounka",
+                        "RicniKm": "135,34",
+                        "MigProst": "ano",
+                        "Objekty": [
+                            {
+                                "Odkaz": {
+                                    "Url": "http://webgis.nature.cz/aopkrest/mig/po/16",
+                                    "UIValue": "rybí přechod"
+                                }
+                            }
+                        ],
+                        "Mve": []
+                    }
+                }
+            }
+
+
+## Karta pro nakládání s vodami dle ID [/naklvod/{id}?f={f}]
+
++ Parameters
+    + id: 271 (number) - ID
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+
+### Přehled dotazů [GET]
+
++ Response 200 (application/json)
+
+            {
+                "NaklVod": {
+                    "Odkaz": {
+                        "Url": "http://webgis.nature.cz/aopkrest/mig/naklvod/271",
+                        "UIValue": "vzdouvání, akumulace"
+                    },
+                    "NazevTok": "Ohře",
+                    "RicniKm": "22,25",
+                    "Id": 271,
+                    "KatId": 16,
+                    "KatNazev": "nakládání s vodami",
+                    "OdkazMapa": {
+                        "Url": "http://webgis.nature.cz/mig?vrstva=2&najdi=271",
+                        "UIValue": "mapa"
+                    },
+                    "NaklVodDalsi": [
+                        {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/naklvod/167",
+                            "UIValue": "jiný"
+                        },
+                        {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/naklvod/168",
+                            "UIValue": "jiný"
+                        },
+                        {
+                            "Url": "http://webgis.nature.cz/aopkrest/mig/naklvod/825",
+                            "UIValue": "jiný"
+                        }
+                    ],
+                    "Lokalizace": {
+                        "Lat": 50.4047,
+                        "Lon": 14.0587,
+                        "UIValue": "50.4047N 14.0587E"
+                    },
+                    "Url": {
+                        "Url": null,
+                        "UIValue": "Ohre184852008OZP683.pdf"
+                    },
+                    "CjPovol": "18485/2008/OŽP",
+                    "KatInfo": {
+                        "DatPlat": "14.08.2009 - 31.12.2100",
+                        "VodUrad": "Lovosice",
+                        "OprProvoz": "EWA Libochvice, s.r.o.",
+                        "MzpHodn": "4 m3/s",
+                        "MaxAku": "160,57 m n. m."
+                    }
+                }
+            }
+
+## Číselníky [/ciselniky/?f={f}]
 
 + Parameters
     + f (string, optional) - formát výstupu
@@ -56,67 +383,1411 @@ Vrací data poslendních změn v seznam druhů a biotopů pro lokality a čísel
             + html
             + xml
 
-### Podrobnosti [GET]
+### Přehled dotazů [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[Zmena])
-    + Attributes (array[Zmena])
- 
 
+            {
+                "Ciselniky": {
+                    "Nemapovano": [
+                        {
+                            "Id": 1,
+                            "Duvod": "nepřijatelné hydrologické podmínky",
+                            "Popis": "Vodní tok se vyznačuje takovými hydrologickými podmínkami, které v něm znemožňují migraci ryb. Jedná se o přirozeně nízký průtok, nadměrné vysychání či vysokou rychlost proudu."
+                        },
+                        {
+                            "Id": 2,
+                            "Duvod": "silná fragmentace ",
+                            "Popis": "Vymezený úsek vodního toku je na relativně krátké vzdálenosti (1 km) přehrazen větším množstvím příčných bariér (3 překážky a více). Obdobný charakter fragmentace je typický pro další navazující úseky tohoto vodního toku či jeho přítoků. Migrační zprostupnění takto postiženého úseku (místní říční sítě) je z ekonomického hlediska téměř nereálné. "
+                        },
+                        {
+                            "Id": 3,
+                            "Duvod": "lokalizace nad přehradou či rybníkem",
+                            "Popis": "Jedná se o vyšší partii vodního toku následně protékající rybníkem (případně rybniční soustavou) nebo zaúsťující se do přehradní nádrže. Zprůchodnění příčných bariér nad těmito vodními útvary pro migrující ichtyofaunu je, jak z ekonomického, tak ekologického hlediska, nepřípustné, běžně však nerealizovatelné. Tato situace může být změněna silným zájmem ochrany přírody a krajiny."
+                        },
+                        {
+                            "Id": 4,
+                            "Duvod": "nadměrný výskyt invazních druhů ryb a raků",
+                            "Popis": "Vodní tok, resp. jeho úsek, kde se vyskytuje vysoké druhové či početní zastoupení invazních druhů ryb a raků. Zprostupnění bariér by znamenalo jejich nežádoucí rozšíření do dalších úseků říční sítě. "
+                        },
+                        {
+                            "Id": 5,
+                            "Duvod": "bez přirozeného výskytu ryb",
+                            "Popis": "Vodní tok je ovlivněn takovými faktory prostředí, které v něm neumožňují přirozený výskyt ichtyofauny. Např. vysoká teplota vody, nízká potravní nabídka, silný zákal, kyselost vody apod."
+                        },
+                        {
+                            "Id": 6,
+                            "Duvod": "nevýznamný vodní tok v MZCHÚ",
+                            "Popis": "Vodní tok zasahující na území MZCHÚ, kde předmětem ochrany není ichtyofauna. Druhové zastoupení ryb je v tomto toku druhově nevýznamné. "
+                        },
+                        {
+                            "Id": 7,
+                            "Duvod": "jiné",
+                            "Popis": null
+                        }
+                    ],
+                    "Objekt": [
+                        {
+                            "Id": 1,
+                            "Objekt": "jez",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 2,
+                            "Objekt": "práh - stupeň",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 3,
+                            "Objekt": "skluz",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 4,
+                            "Objekt": "retenční přehrážka",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 5,
+                            "Objekt": "poldr",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 6,
+                            "Objekt": "hráz",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 8,
+                            "Objekt": "rybí přechod",
+                            "Karta": "prostupný objekt"
+                        },
+                        {
+                            "Id": 9,
+                            "Objekt": "balvanitý skluz",
+                            "Karta": "prostupný objekt"
+                        },
+                        {
+                            "Id": 10,
+                            "Objekt": "vodácká propust",
+                            "Karta": "prostupný objekt"
+                        },
+                        {
+                            "Id": 11,
+                            "Objekt": "šetrná turbína",
+                            "Karta": "prostupný objekt"
+                        },
+                        {
+                            "Id": 12,
+                            "Objekt": "samovolný",
+                            "Karta": "prostupný objekt"
+                        },
+                        {
+                            "Id": 13,
+                            "Objekt": "jiný",
+                            "Karta": "prostupný objekt"
+                        },
+                        {
+                            "Id": 14,
+                            "Objekt": "MVE",
+                            "Karta": "malá vodní elektrárna"
+                        },
+                        {
+                            "Id": 7,
+                            "Objekt": "jiná",
+                            "Karta": "migrační bariéra"
+                        },
+                        {
+                            "Id": 15,
+                            "Objekt": "vodní tok",
+                            "Karta": "vodní tok"
+                        },
+                        {
+                            "Id": 16,
+                            "Objekt": "nakládání s vodami",
+                            "Karta": "nakládání s vodami"
+                        }
+                    ],
+                    "KatInfoUI": [
+                        {
+                            "Id": 1,
+                            "KatId": 6,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 2,
+                            "KatId": 6,
+                            "Api": "DtbSpravce",
+                            "Nazev": "Čerpáno z databáze správce vodního toku"
+                        },
+                        {
+                            "Id": 3,
+                            "KatId": 6,
+                            "Api": "HrazTyp",
+                            "Nazev": "Typ"
+                        },
+                        {
+                            "Id": 4,
+                            "KatId": 6,
+                            "Api": "HrazVyska",
+                            "Nazev": "Výška"
+                        },
+                        {
+                            "Id": 5,
+                            "KatId": 6,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 6,
+                            "KatId": 6,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 7,
+                            "KatId": 6,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 8,
+                            "KatId": 6,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 9,
+                            "KatId": 6,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 10,
+                            "KatId": 1,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 11,
+                            "KatId": 1,
+                            "Api": "DtbSpravce",
+                            "Nazev": "Čerpáno z databáze správce vodního toku"
+                        },
+                        {
+                            "Id": 12,
+                            "KatId": 1,
+                            "Api": "JezStav",
+                            "Nazev": "Stav"
+                        },
+                        {
+                            "Id": 13,
+                            "KatId": 1,
+                            "Api": "JezDruh",
+                            "Nazev": "Druh"
+                        },
+                        {
+                            "Id": 14,
+                            "KatId": 1,
+                            "Api": "JezDruhJiny",
+                            "Nazev": "Jiný druh"
+                        },
+                        {
+                            "Id": 15,
+                            "KatId": 1,
+                            "Api": "JezPudorys",
+                            "Nazev": "Půdorys"
+                        },
+                        {
+                            "Id": 16,
+                            "KatId": 1,
+                            "Api": "JezPudorysJiny",
+                            "Nazev": "Jiný půdorys"
+                        },
+                        {
+                            "Id": 17,
+                            "KatId": 1,
+                            "Api": "JezVyska",
+                            "Nazev": "Výška"
+                        },
+                        {
+                            "Id": 18,
+                            "KatId": 1,
+                            "Api": "JezUcel",
+                            "Nazev": "Účel"
+                        },
+                        {
+                            "Id": 19,
+                            "KatId": 1,
+                            "Api": "JezUcelJiny",
+                            "Nazev": "Jiný účel"
+                        },
+                        {
+                            "Id": 20,
+                            "KatId": 1,
+                            "Api": "JezPlKomora",
+                            "Nazev": "Plavební komora"
+                        },
+                        {
+                            "Id": 21,
+                            "KatId": 1,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 22,
+                            "KatId": 1,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 23,
+                            "KatId": 1,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 24,
+                            "KatId": 1,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 25,
+                            "KatId": 1,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 26,
+                            "KatId": 7,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 27,
+                            "KatId": 7,
+                            "Api": "JinaPopis",
+                            "Nazev": "Popis bariéry"
+                        },
+                        {
+                            "Id": 28,
+                            "KatId": 7,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 29,
+                            "KatId": 7,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 30,
+                            "KatId": 7,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 31,
+                            "KatId": 7,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 32,
+                            "KatId": 7,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 33,
+                            "KatId": 5,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 34,
+                            "KatId": 5,
+                            "Api": "DtbSpravce",
+                            "Nazev": "Čerpáno z databáze správce vodního toku"
+                        },
+                        {
+                            "Id": 35,
+                            "KatId": 5,
+                            "Api": "PoldrNadr",
+                            "Nazev": "Stálé nadržení vody"
+                        },
+                        {
+                            "Id": 36,
+                            "KatId": 5,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 37,
+                            "KatId": 5,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 38,
+                            "KatId": 5,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 39,
+                            "KatId": 5,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 40,
+                            "KatId": 5,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 41,
+                            "KatId": 2,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 42,
+                            "KatId": 2,
+                            "Api": "DtbSpravce",
+                            "Nazev": "Čerpáno z databáze správce vodního toku"
+                        },
+                        {
+                            "Id": 43,
+                            "KatId": 2,
+                            "Api": "PrahStav",
+                            "Nazev": "Stav"
+                        },
+                        {
+                            "Id": 44,
+                            "KatId": 2,
+                            "Api": "PrahVyska",
+                            "Nazev": "Výška"
+                        },
+                        {
+                            "Id": 45,
+                            "KatId": 2,
+                            "Api": "PrahUcel",
+                            "Nazev": "Účel"
+                        },
+                        {
+                            "Id": 46,
+                            "KatId": 2,
+                            "Api": "PrahUcelJiny",
+                            "Nazev": "Jiný účel"
+                        },
+                        {
+                            "Id": 47,
+                            "KatId": 2,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 48,
+                            "KatId": 2,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 49,
+                            "KatId": 2,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 50,
+                            "KatId": 2,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 51,
+                            "KatId": 2,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 52,
+                            "KatId": 4,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 53,
+                            "KatId": 4,
+                            "Api": "DtbSpravce",
+                            "Nazev": "Čerpáno z databáze správce vodního toku"
+                        },
+                        {
+                            "Id": 54,
+                            "KatId": 4,
+                            "Api": "PreStav",
+                            "Nazev": "Stav"
+                        },
+                        {
+                            "Id": 55,
+                            "KatId": 4,
+                            "Api": "PreVyska",
+                            "Nazev": "Výška"
+                        },
+                        {
+                            "Id": 56,
+                            "KatId": 4,
+                            "Api": "PreUcel",
+                            "Nazev": "Účel"
+                        },
+                        {
+                            "Id": 57,
+                            "KatId": 4,
+                            "Api": "PreUcelJiny",
+                            "Nazev": "Jiný účel"
+                        },
+                        {
+                            "Id": 58,
+                            "KatId": 4,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 59,
+                            "KatId": 4,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 60,
+                            "KatId": 4,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 61,
+                            "KatId": 4,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 62,
+                            "KatId": 4,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 63,
+                            "KatId": 3,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 64,
+                            "KatId": 3,
+                            "Api": "DtbSpravce",
+                            "Nazev": "Čerpáno z databáze správce vodního toku"
+                        },
+                        {
+                            "Id": 65,
+                            "KatId": 3,
+                            "Api": "SkluzStav",
+                            "Nazev": "Stav"
+                        },
+                        {
+                            "Id": 66,
+                            "KatId": 3,
+                            "Api": "SkluzDelka",
+                            "Nazev": "Délka"
+                        },
+                        {
+                            "Id": 67,
+                            "KatId": 3,
+                            "Api": "SkluzSklon",
+                            "Nazev": "Sklon"
+                        },
+                        {
+                            "Id": 68,
+                            "KatId": 3,
+                            "Api": "SkluzUcel",
+                            "Nazev": "Účel"
+                        },
+                        {
+                            "Id": 69,
+                            "KatId": 3,
+                            "Api": "SkluzUcelJiny",
+                            "Nazev": "Jiný účel"
+                        },
+                        {
+                            "Id": 70,
+                            "KatId": 3,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 71,
+                            "KatId": 3,
+                            "Api": "OnlineUrl",
+                            "Nazev": "Online přenos"
+                        },
+                        {
+                            "Id": 72,
+                            "KatId": 3,
+                            "Api": "Datum",
+                            "Nazev": "Datum záznamu"
+                        },
+                        {
+                            "Id": 73,
+                            "KatId": 3,
+                            "Api": "Kontakt",
+                            "Nazev": "Kontaktní osoba"
+                        },
+                        {
+                            "Id": 74,
+                            "KatId": 3,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 75,
+                            "KatId": 9,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 76,
+                            "KatId": 9,
+                            "Api": "SkluzSklon",
+                            "Nazev": "Sklon"
+                        },
+                        {
+                            "Id": 77,
+                            "KatId": 9,
+                            "Api": "SkluzDelka",
+                            "Nazev": "Délka"
+                        },
+                        {
+                            "Id": 78,
+                            "KatId": 9,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 79,
+                            "KatId": 13,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 80,
+                            "KatId": 13,
+                            "Api": "JinyPopis",
+                            "Nazev": "Popis objektu"
+                        },
+                        {
+                            "Id": 81,
+                            "KatId": 13,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 82,
+                            "KatId": 8,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 83,
+                            "KatId": 8,
+                            "Api": "PreTyp",
+                            "Nazev": "Typ"
+                        },
+                        {
+                            "Id": 84,
+                            "KatId": 8,
+                            "Api": "PreTypJiny",
+                            "Nazev": "Jiný typ"
+                        },
+                        {
+                            "Id": 85,
+                            "KatId": 8,
+                            "Api": "PreUmist",
+                            "Nazev": "Umístění"
+                        },
+                        {
+                            "Id": 86,
+                            "KatId": 8,
+                            "Api": "PreUmistJiny",
+                            "Nazev": "Jiné umístění"
+                        },
+                        {
+                            "Id": 87,
+                            "KatId": 8,
+                            "Api": "PreSklon",
+                            "Nazev": "Sklon"
+                        },
+                        {
+                            "Id": 88,
+                            "KatId": 8,
+                            "Api": "PreDelka",
+                            "Nazev": "Délka"
+                        },
+                        {
+                            "Id": 89,
+                            "KatId": 8,
+                            "Api": "PreSirka",
+                            "Nazev": "Šířka"
+                        },
+                        {
+                            "Id": 90,
+                            "KatId": 8,
+                            "Api": "PreSirkaPopis",
+                            "Nazev": "Popis šířky"
+                        },
+                        {
+                            "Id": 91,
+                            "KatId": 8,
+                            "Api": "PropPrutok",
+                            "Nazev": "Průtok"
+                        },
+                        {
+                            "Id": 92,
+                            "KatId": 8,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 93,
+                            "KatId": 12,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 94,
+                            "KatId": 12,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 95,
+                            "KatId": 11,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 96,
+                            "KatId": 11,
+                            "Api": "TurbTyp",
+                            "Nazev": "Typ"
+                        },
+                        {
+                            "Id": 97,
+                            "KatId": 11,
+                            "Api": "TurbTypJina",
+                            "Nazev": "Jiný typ"
+                        },
+                        {
+                            "Id": 98,
+                            "KatId": 11,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 99,
+                            "KatId": 10,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 100,
+                            "KatId": 10,
+                            "Api": "PropUmist",
+                            "Nazev": "Umístění"
+                        },
+                        {
+                            "Id": 101,
+                            "KatId": 10,
+                            "Api": "PropUmistJiny",
+                            "Nazev": "Jiné umístění"
+                        },
+                        {
+                            "Id": 102,
+                            "KatId": 10,
+                            "Api": "PropSklon",
+                            "Nazev": "Sklon"
+                        },
+                        {
+                            "Id": 103,
+                            "KatId": 10,
+                            "Api": "PropDelka",
+                            "Nazev": "Délka"
+                        },
+                        {
+                            "Id": 104,
+                            "KatId": 10,
+                            "Api": "PropSirka",
+                            "Nazev": "Šířka"
+                        },
+                        {
+                            "Id": 105,
+                            "KatId": 10,
+                            "Api": "PropPrutok",
+                            "Nazev": "Průtok"
+                        },
+                        {
+                            "Id": 106,
+                            "KatId": 10,
+                            "Api": "PropVystr",
+                            "Nazev": "Vystrojení vodácké propusti"
+                        },
+                        {
+                            "Id": 107,
+                            "KatId": 10,
+                            "Api": "PropVystrJiny",
+                            "Nazev": "Jiné vystrojení"
+                        },
+                        {
+                            "Id": 108,
+                            "KatId": 10,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 109,
+                            "KatId": 14,
+                            "Api": "DatMon",
+                            "Nazev": "Datum mapování"
+                        },
+                        {
+                            "Id": 110,
+                            "KatId": 14,
+                            "Api": "MveStav",
+                            "Nazev": "Stav"
+                        },
+                        {
+                            "Id": 111,
+                            "KatId": 14,
+                            "Api": "MveUmist",
+                            "Nazev": "Umístění"
+                        },
+                        {
+                            "Id": 112,
+                            "KatId": 14,
+                            "Api": "MveUmistPopis",
+                            "Nazev": "Jiné umístění"
+                        },
+                        {
+                            "Id": 113,
+                            "KatId": 14,
+                            "Api": "MvePoprOchr",
+                            "Nazev": "Poproudová ochrana ryb"
+                        },
+                        {
+                            "Id": 114,
+                            "KatId": 14,
+                            "Api": "MvePoprOchrType",
+                            "Nazev": "Poproudová ochrana"
+                        },
+                        {
+                            "Id": 115,
+                            "KatId": 14,
+                            "Api": "MveTypMechZabr",
+                            "Nazev": "Typ mechanické zábrany"
+                        },
+                        {
+                            "Id": 117,
+                            "KatId": 14,
+                            "Api": "MveMechZabrJina",
+                            "Nazev": "Jiná mechanická zábrana"
+                        },
+                        {
+                            "Id": 118,
+                            "KatId": 14,
+                            "Api": "Clony",
+                            "Nazev": "Clony (odpuzovače)"
+                        },
+                        {
+                            "Id": 119,
+                            "KatId": 14,
+                            "Api": "ClonyJine",
+                            "Nazev": "Jiná clona (odpuzovač)"
+                        },
+                        {
+                            "Id": 120,
+                            "KatId": 14,
+                            "Api": "MveSetrTurbina",
+                            "Nazev": "Šetrná turbína"
+                        },
+                        {
+                            "Id": 121,
+                            "KatId": 14,
+                            "Api": "MveSetrTurbinaJina",
+                            "Nazev": "Jiná šetrná turbína"
+                        },
+                        {
+                            "Id": 122,
+                            "KatId": 14,
+                            "Api": "Poznamka",
+                            "Nazev": "Poznámka"
+                        },
+                        {
+                            "Id": 123,
+                            "KatId": 8,
+                            "Api": "Rok",
+                            "Nazev": "Rok záznamu"
+                        },
+                        {
+                            "Id": 124,
+                            "KatId": 8,
+                            "Api": "Hodnotitel",
+                            "Nazev": "Hodnotitel"
+                        },
+                        {
+                            "Id": 125,
+                            "KatId": 8,
+                            "Api": "Url",
+                            "Nazev": "Záznam ke stažení"
+                        },
+                        {
+                            "Id": 126,
+                            "KatId": 8,
+                            "Api": "NazevRp",
+                            "Nazev": "Název rybího přechodu"
+                        },
+                        {
+                            "Id": 127,
+                            "KatId": 8,
+                            "Api": "NalezeniHv",
+                            "Nazev": "Možnost nalezení vtoku do RP"
+                        },
+                        {
+                            "Id": 128,
+                            "KatId": 8,
+                            "Api": "PrvkyOmez",
+                            "Nazev": "Další prvky omezující migraci na vtoku do RP"
+                        },
+                        {
+                            "Id": 129,
+                            "KatId": 8,
+                            "Api": "PoprMigrace",
+                            "Nazev": "Umožnuje RP poproudovou migraci"
+                        },
+                        {
+                            "Id": 130,
+                            "KatId": 8,
+                            "Api": "PoprMigracePrvky",
+                            "Nazev": "Další prvky umožňující poproudovou migraci"
+                        },
+                        {
+                            "Id": 131,
+                            "KatId": 8,
+                            "Api": "PoprMigracePrvkyJine",
+                            "Nazev": "Jiné prvky"
+                        },
+                        {
+                            "Id": 132,
+                            "KatId": 8,
+                            "Api": "NalezeniDv",
+                            "Nazev": "Možnost nalezení vstupu do RP z podjezí"
+                        },
+                        {
+                            "Id": 133,
+                            "KatId": 8,
+                            "Api": "ProtiPrMigrace",
+                            "Nazev": "Umožnuje RP protiproudovou migraci"
+                        },
+                        {
+                            "Id": 134,
+                            "KatId": 8,
+                            "Api": "ProtiPrMigracePrvky",
+                            "Nazev": "Další prvky umožňující protiproudovou migraci"
+                        },
+                        {
+                            "Id": 135,
+                            "KatId": 8,
+                            "Api": "ProtiPrMigracePrvkyJine",
+                            "Nazev": "Jiné prvky"
+                        },
+                        {
+                            "Id": 136,
+                            "KatId": 8,
+                            "Api": "Poznamka",
+                            "Nazev": "Slovní hodnocení rybího přechodu"
+                        },
+                        {
+                            "Id": 137,
+                            "KatId": 8,
+                            "Api": "CelekHodnRp",
+                            "Nazev": "Celkové hodnocení rybího přechodu"
+                        },
+                        {
+                            "Id": 138,
+                            "KatId": 16,
+                            "Api": "NaklVod",
+                            "Nazev": "Způsob nakládání s vodami"
+                        },
+                        {
+                            "Id": 139,
+                            "KatId": 16,
+                            "Api": "Dbid",
+                            "Nazev": "Kód"
+                        },
+                        {
+                            "Id": 140,
+                            "KatId": 16,
+                            "Api": "NazevTok",
+                            "Nazev": "Název vodního toku"
+                        },
+                        {
+                            "Id": 141,
+                            "KatId": 16,
+                            "Api": "RicniKm",
+                            "Nazev": "Říční kilometr"
+                        },
+                        {
+                            "Id": 142,
+                            "KatId": 16,
+                            "Api": "Lokalizace",
+                            "Nazev": "GPS"
+                        },
+                        {
+                            "Id": 143,
+                            "KatId": 16,
+                            "Api": "PresLok",
+                            "Nazev": "Přesnost lokalizace"
+                        },
+                        {
+                            "Id": 144,
+                            "KatId": 16,
+                            "Api": "DatPlat",
+                            "Nazev": "Doba platnosti nakládání s vodami"
+                        },
+                        {
+                            "Id": 145,
+                            "KatId": 16,
+                            "Api": null,
+                            "Nazev": "Další způsob nakládání s vodami"
+                        },
+                        {
+                            "Id": 146,
+                            "KatId": 16,
+                            "Api": "Url",
+                            "Nazev": "Povolení k nakládání s vodami"
+                        },
+                        {
+                            "Id": 147,
+                            "KatId": 16,
+                            "Api": "CjPovol",
+                            "Nazev": "Číslo jednací  povolení"
+                        },
+                        {
+                            "Id": 148,
+                            "KatId": 16,
+                            "Api": "VodUrad",
+                            "Nazev": "Příslušný vodoprávní úřad"
+                        },
+                        {
+                            "Id": 149,
+                            "KatId": 16,
+                            "Api": "NazevProvoz",
+                            "Nazev": "Název provozu"
+                        },
+                        {
+                            "Id": 150,
+                            "KatId": 16,
+                            "Api": "OprProvoz",
+                            "Nazev": "Oprávněný provozovatel"
+                        },
+                        {
+                            "Id": 151,
+                            "KatId": 16,
+                            "Api": "MzpHodn",
+                            "Nazev": "Minimální zůstatkový průtok"
+                        },
+                        {
+                            "Id": 152,
+                            "KatId": 16,
+                            "Api": "MzpKom",
+                            "Nazev": "Poznámka k min. zůstatkovému průtoku"
+                        },
+                        {
+                            "Id": 153,
+                            "KatId": 16,
+                            "Api": "MaxOdb",
+                            "Nazev": "Maximální odběr vody"
+                        },
+                        {
+                            "Id": 154,
+                            "KatId": 16,
+                            "Api": "MaxKom",
+                            "Nazev": "Poznámka k maximálnímu odběru"
+                        },
+                        {
+                            "Id": 155,
+                            "KatId": 16,
+                            "Api": "MaxOv",
+                            "Nazev": "Maximální vypouštění odpadní vody"
+                        },
+                        {
+                            "Id": 156,
+                            "KatId": 16,
+                            "Api": "OvKom",
+                            "Nazev": "Poznámka k maximálnímu vypouštění"
+                        },
+                        {
+                            "Id": 157,
+                            "KatId": 16,
+                            "Api": "MaxAku",
+                            "Nazev": "Maximální výška akumulace vody"
+                        },
+                        {
+                            "Id": 158,
+                            "KatId": 16,
+                            "Api": "AkuKom",
+                            "Nazev": "Poznámka k maximální výšce akumulace"
+                        },
+                        {
+                            "Id": 159,
+                            "KatId": 16,
+                            "Api": "TypVe",
+                            "Nazev": "Technologie turbín vodních elektráren"
+                        },
+                        {
+                            "Id": 160,
+                            "KatId": 16,
+                            "Api": "ProvVe",
+                            "Nazev": "Režim provozu vodní elektrárny"
+                        },
+                        {
+                            "Id": 161,
+                            "KatId": 16,
+                            "Api": "VyrobVe",
+                            "Nazev": "Průměrná roční výroba energie"
+                        },
+                        {
+                            "Id": 162,
+                            "KatId": 16,
+                            "Api": "InstalVe",
+                            "Nazev": "Instalovaný výkon vodní elektrárny"
+                        },
+                        {
+                            "Id": 163,
+                            "KatId": 16,
+                            "Api": "DosazVe",
+                            "Nazev": "Dosažitelný výkon vodní elektrárny"
+                        },
+                        {
+                            "Id": 164,
+                            "KatId": 16,
+                            "Api": "InfoNakl",
+                            "Nazev": "Další údaje o provozu /nakládání s vodami"
+                        },
+                        {
+                            "Id": 165,
+                            "KatId": 16,
+                            "Api": "Pozn",
+                            "Nazev": "Poznámka"
+                        }
+                    ]
+                }
+            }
+
+## Toky - změny [/zmeny/tok?datum={datum}&f={f}]
+
++ Parameters
+    + datum: `2017-07-21` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+            {
+                "TokZmeny": [
+                    {
+                        "IdNumber": 5009,
+                        "DatumZmeny": "2018-03-05T10:49:25"
+                    }
+                ]
+            }
+## Tok - změna dle ID [/zmeny/tok/id/{id}?f={f}]
++ Parameters
+    + id: 1 (number) - Kod toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+            {
+                "TokZmena": {
+                    "IdNumber": 1,
+                    "DatumZmeny": "2017-06-08T16:21:32"
+                }
+            }
+## Bariéry - změny [/zmeny/bar?datum={datum}&f={f}]
++ Parameters
+    + datum: `2017-07-21` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+        {
+            "BarZmeny": [
+                {
+                    "IdNumber": 4684,
+                    "DatumZmeny": "2018-03-05T10:49:25"
+                },
+                {
+                    "IdNumber": 1382,
+                    "DatumZmeny": "2018-03-05T10:49:25"
+                },
+                {
+                    "IdNumber": 1383,
+                    "DatumZmeny": "2018-03-05T10:49:25"
+                },
+                {
+                    "IdNumber": 4685,
+                    "DatumZmeny": "2018-03-05T10:49:25"
+                }
+            ]
+        }
+## Bariéra - změna dle ID [/zmeny/bar/id/{id}?f={f}]
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+        {
+            "BarZmena": {
+                "IdNumber": 1,
+                "DatumZmeny": "2017-06-19T13:49:25"
+            }
+        }
+## Prostupné objekty - změny [/zmeny/po?datum={datum}&f={f}]
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+    + Attributes (array[ZmenaVZCHU])
+    + Attributes (array[ZmenaVZCHU])
+## Prostupný objekt - změna dle id [/zmeny/po/id/{id}?f={f}]
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+            {
+                "PoZmena": {
+                    "IdNumber": 1,
+                    "DatumZmeny": "2017-07-04T14:25:25"
+                }
+            }
+## Malé vodní elektrárny /MVE/ - změny [/zmeny/mve?datum={datum}&f={f}]
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+            {
+                "MveZmeny": [
+                    {
+                        "IdNumber": 1,
+                        "DatumZmeny": "2017-07-17T14:55:25"
+                    },
+                    {
+                        "IdNumber": 30,
+                        "DatumZmeny": "2017-07-17T14:55:22"
+                    },
+                    {
+                        "IdNumber": 42,
+                        "DatumZmeny": "2017-07-17T14:55:23"
+                    },
+                    {
+                        "IdNumber": 91,
+                        "DatumZmeny": "2017-07-17T14:55:22"
+                    },
+                    {
+                        "IdNumber": 129,
+                        "DatumZmeny": "2017-07-17T14:55:23"
+                    },
+                    {
+                        "IdNumber": 198,
+                        "DatumZmeny": "2017-07-17T14:55:23"
+                    },
+                    {
+                        "IdNumber": 780,
+                        "DatumZmeny": "2017-07-17T14:55:25"
+                    }
+                ]
+            }
+## Malá vodní elektrárna /MVE/ - změna dle id [/zmeny/mve/id/{id}?f={f}]
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+                {
+                    "MveZmena": {
+                        "IdNumber": 1,
+                        "DatumZmeny": "2017-07-17T14:55:25"
+                    }
+                }
+## Nakládání s vodami - změny [/zmeny/naklvod?datum={datum}&f={f}]
++ Parameters
+    + datum: `2017-07-01` (string, optional) - výstup vrátí záznamy, které mají datum změny vyšší nežli zadané datum. *[datum ve fromátech "yyyyMMdd", "dd.MM.yyyy", "yyyy-MM-dd", "dd-MM-yyyy", "d.M.yyyy", "dd. MM. yyyy", "d. M. yyyy"]
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+            {
+                "NaklVodZmeny": [
+                    {
+                        "IdNumber": 544,
+                        "DatumZmeny": "2017-06-08T14:17:55"
+                    },
+                    {
+                        "IdNumber": 892,
+                        "DatumZmeny": "2017-06-08T14:17:55"
+                    },
+                    {
+                        "IdNumber": 918,
+                        "DatumZmeny": "2017-06-08T14:17:55"
+                    },
+                    {
+                        "IdNumber": 1036,
+                        "DatumZmeny": "2017-06-08T14:17:55"
+                    },
+                    {
+                        "IdNumber": 733,
+                        "DatumZmeny": "2017-06-08T14:17:55"
+                    },
+            
+                    {
+                        "IdNumber": 855,
+                        "DatumZmeny": "2017-06-08T14:17:55"
+                    }
+                ]
+            }
+## Nakládání s vodou - změna dle id [/zmeny/naklvod/id/{id}?f={f}]
++ Parameters
+    + id: 1 (number) - Kód toku
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+            {
+                "NaklVodZmena": {
+                    "IdNumber": 1,
+                    "DatumZmeny": "2017-06-08T14:17:55"
+                }
+            }
+    
+    
+    
+## Číselníky - změny [/zmeny/ciselniky?f={f}]
++ Parameters
+    + f (string, optional) - formát výstupu
+        + Default: html
+        + Members
+            + pjson - formátovaný json
+            + json
+            + html
+            + xml
+### Přehled dotazů [GET]
++ Response 200 (application/json)
+        {
+            "CiselnikyZmeny": [
+                {
+                    "Nazev": "Nemapovano",
+                    "DatumZmeny": "2017-06-21T09:56:58"
+                },
+                {
+                    "Nazev": "Objekt",
+                    "DatumZmeny": null
+                },
+                {
+                    "Nazev": "KatInfoUI",
+                    "DatumZmeny": "2017-07-19T10:15:36"
+                }
+            ]
+        }
 # Data Structures
-
-##Lokalita
-+ LokalitaId: 4 (number) - id lokality 
-+ Biotopy (array) 
-    + (Biotop)
-    + (Biotop)
-+ Druhy (array)
-    + (Druh)
-    + (Druh)
-
-##Ciselnik
-+ Biotopy (array)
-    + (CisBiotop)
-    + (CisBiotop)
-+ Druhy (array) 
-    + (CisDruh)
-    + (CisDruh)
-
-
-##Biotop
-+ include CisBiotop
-+ Rozloha (object)
-    + RozlohaHodnota: 1164.5611 (number) - Rozloha biotopu - číselně 
-    + RozlohaJednotka: ha (string) - Rozloha biotopu - jednotka 
-    + UIValue: 1 164.561 ha (string) - rozloha biotopu zformátovaná pro výstup
-+ RozlohaRelativni: 18.8 (number) - relativní rozloha biotopu
-+ Kvalita: 2.12 (number) - Kvalita biotopu
-
-##Druh
-+ include CisBiotop
-+ CervenySeznam: null (string) - Červený seznam 
-+ RokPoslZaz: 2015 (number) - rok posledního záznamu
-+ DruhKarta: `http://portal.nature.cz/publik_syst/nd_nalez-public.php?idTaxon=4` (string) - odkaz na kartu druhu - jako odkaz z Latinský název druhu  `http://portal.nature.cz/publik_syst/nd_nalez-public.php?`** \TaxonId\ **
-
-##CisBiotop
-+ StanovisteKod: 91F0 (string) - Kód typu přírodního stanoviště
-+ StanovisteNazev: `Smíšené lužní lesy s dubem letním (Quercus robur) jilmem vazem (Ulmus laevis) a jilmem habrolistým (Ulmus minor) jasanem ztepilým (Fraxinus excelsior) nebo jasanem úzkolistým (Fraxinus angustifolia) podél velkých řek (Ulmenion minoris)` (string) - Název typu přírodního stanoviště  * obsahuje formátování latinských názvů kurzívou <i></i>*
-+ StanovisteNazevEn: `Riparian mixed forest of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia along the great rivers (Ulmenion minoris)` (string) - Název typu přírodního stanoviště v angličtině  * obsahuje formátování latinských názvů kurzívou <i></i>*
-+ BiotopKod: L2.3 (string) - Kód biotopu 
-+ BiotopNazev: Tvrdé luhy nížinných řek (string) - Název Biotopu  * obsahuje formátování latinských názvů kurzívou <i></i>*
-+ BiotopNazevEn: Tvrdé luhy nížinných řek (string) - Název Biotopu v angličtině   * obsahuje formátování latinských názvů kurzívou <i></i>*
-
-##CisDruh
-+ TaxonId: 4 (number) - id taxonu
-+ DruhKat: Obojživelníci (string) - Kategorie 
-+ DruhNazevCz: ropucha obecná (string, optional) - Český název druhu 
-+ DruhNazevLat: Bufo bufo (string) - Latinský název druhu
-+ OchranaKat: Ohrožený (string) - Kategorie
-+ Smernice: null (string) 
-
-##Zmena
-+ Agenda: data (enum [string]) - Typ dat
+## MapaTok
++ Kod: 103 (number) - kód lokality v ústředním seznamu ochrany přírody
++ Scale: 17045.4774803152 (number) - měřítko mapy - přesně
++ ImageSource: 137,80,78,71,13,10,96,130 (array [number]) - obrázek v bytech
++ ImageFormat: Jpeg (enum [string]) - formát souboru s obrázkem mapy
     + Members
-    + data - změna v seznamu druhů a biotopů
-    + ciselniky - změna v číselnících 
-+ Datum: `2018-05-14` (string) - datum poslední změny v dané agendě
+    + Jpeg
++ ScaleView: 17 045 (string) - měřítko mapy zformátované pro zobrazení
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
